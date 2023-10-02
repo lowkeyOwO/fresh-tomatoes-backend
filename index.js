@@ -9,12 +9,12 @@ import client from "./cache/cacheClient.js";
 import verifyToken from "./middleware/jwtmiddleware.js";
 
 // Path Functions
-import post_login from "./api/post_login.js";
-import post_profile from "./api/post_profile.js";
-import addFavorites from "./api/post_addFavorites.js";
-import post_add_review from "./api/post_addReview.js";
-import delete_del_review from "./api/delete_del_review.js";
-import patch_edit_review from "./api/patch_edit_review.js";
+import post_login from "./api_routes/post_login.js";
+import post_profile from "./api_routes/post_profile.js";
+import addFavorites from "./api_routes/post_addFavorites.js";
+import post_add_review from "./api_routes/post_addReview.js";
+import delete_del_review from "./api_routes/delete_del_review.js";
+import patch_edit_review from "./api_routes/patch_edit_review.js";
 import followUser from "./database/actions/user/followUser.js";
 import unfollowUser from "./database/actions/user/unfollowUser.js";
 import getUserDetails from "./database/actions/user/getUserDetails.js";
@@ -33,6 +33,12 @@ app.use(express.urlencoded({ extended: true }));
 
 // Creating mongoose-MongoDB client URI
 const uri = `mongodb+srv://${process.env.MONGO_UNAME}:${process.env.MONGO_PW}@${process.env.MONGO_CLUSTER}.olyl1sd.mongodb.net/${process.env.MONGO_DBNAME}?retryWrites=true&w=majority`;
+
+
+//Home
+app.get("/",(req,res) => {
+  res.status(200).send("WELCOME TO FRESH TOMATOES BACKEND!").end();
+})
 
 // Login to TMDB and return session_token to user
 app.post("/api/login", post_login);
