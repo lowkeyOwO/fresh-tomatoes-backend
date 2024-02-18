@@ -9,7 +9,7 @@ export default async function addFavorites(req, res) {
   try {
     const updateFavorites = await userListModel.findOneAndUpdate(
       { username: username },
-      { $set: { favorite_movies: favMovieList } },
+      { $set: { favorite_movies: favMovieList , newUser : false} },
       { new: true }
     );
     if (updateFavorites.acknowledged === false) {
