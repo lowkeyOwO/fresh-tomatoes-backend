@@ -22,7 +22,7 @@ export default async function getRequestToken() {
     console.log("tokenRequest.js :\t", response);
     return response;
   } catch (err) {
-    console.err("Error:\t", err);
+    console.error("Error:\t", err);
     return { error: err };
   }
 }

@@ -19,6 +19,8 @@ import followUser from "./database/actions/user/followUser.js";
 import unfollowUser from "./database/actions/user/unfollowUser.js";
 import getUserDetails from "./database/actions/user/getUserDetails.js";
 import editWatchList from "./generators/lists/editWatchList.js";
+import post_movie_details from "./api_routes/post_movie_details.js";
+import get_movie_review from "./api_routes/get_movie_review.js";
 
 // dotenv-config
 config();
@@ -34,11 +36,10 @@ app.use(express.urlencoded({ extended: true }));
 // Creating mongoose-MongoDB client URI
 const uri = `mongodb+srv://${process.env.MONGO_UNAME}:${process.env.MONGO_PW}@${process.env.MONGO_CLUSTER}.olyl1sd.mongodb.net/${process.env.MONGO_DBNAME}?retryWrites=true&w=majority`;
 
-
 //Home
-app.get("/",(req,res) => {
+app.get("/", (req, res) => {
   res.status(200).send("WELCOME TO FRESH TOMATOES BACKEND!").end();
-})
+});
 
 // Login to TMDB and return session_token to user
 app.post("/api/login", post_login);
@@ -70,13 +71,19 @@ app.post("/api/addMovieToWatchlist", verifyToken, editWatchList);
 // Get user Profile details
 app.get("/api/findUser", verifyToken, getUserDetails);
 
+//get movie details from TMDB
+app.post("/api/getMovieDetails", verifyToken, post_movie_details);
+
+//get_movie_review from TMDB
+app.post("/api/getMovieReviews", verifyToken, get_movie_review);
+
 app.listen(PORT, () => {
   console.log(`Successfully listening on ${PORT}!`);
-  
+
   client.on("connect", () => {
     console.log("Connected to Redis!");
   });
-  
+
   client.on("error", (error) => {
     console.error("Redis error:", error);
   });

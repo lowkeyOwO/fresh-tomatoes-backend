@@ -19,6 +19,8 @@ const userListSchema = Schema(
     following: [String],
     followers: [String],
     favorite_movies: [Number],
+    bio : String,
+    avatar_path : String,
     reviewed_movies: [
       {
         movie_id: {

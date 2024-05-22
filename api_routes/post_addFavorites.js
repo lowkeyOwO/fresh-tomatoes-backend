@@ -50,7 +50,6 @@ export default async function addFavorites(req, res) {
       };
       const getFavorites = await fetch(getFavoritesURL, getFavOptions);
       const favList = await getFavorites.json();
-      console.log(favList);
       res.status(200).json({ favList });
     }
   } catch (err) {
