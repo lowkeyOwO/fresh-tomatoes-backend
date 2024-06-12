@@ -5,7 +5,9 @@ export default async function editRatinginDB(
   username,
   rating,
   movie_id,
-  review
+  review,
+  title,
+  date
 ) {
   try {
     // Adding to userList array
@@ -15,6 +17,8 @@ export default async function editRatinginDB(
         $set: {
           "reviewed_movies.$.review": review,
           "reviewed_movies.$.rating": rating,
+          "reviewed_movies.$.title" : title,
+          "reviewed_movies.$.created_at" : date
         },
       },
       { returnOriginal: false }
@@ -26,11 +30,13 @@ export default async function editRatinginDB(
         $set: {
           "review_list.$.review": review,
           "review_list.$.rating": rating,
+          "reviewed_movies.$.title" : title,
+          "reviewed_movies.$.created_at" : date
         },
       },
       { returnOriginal: false }
     );
-    console.log(userUpdate, movieUpdate);
+    console.log("Edit rating in DB:\t",userUpdate, movieUpdate);
     if ((userUpdate !== null) & (movieUpdate !== null)) {
       return { success: true };
     }

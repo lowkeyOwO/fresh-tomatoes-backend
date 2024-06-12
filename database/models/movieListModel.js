@@ -40,6 +40,10 @@ const movieListSchema = Schema({
         type: String,
         required: true,
       },
+      title: {
+        type: String,
+        required : true
+      },
       review: {
         type: String,
         required: true,
@@ -49,7 +53,7 @@ const movieListSchema = Schema({
         default: Date.now,
       },
       rating: {
-        type: Number,
+        type: Schema.Types.Decimal128,
         required: true,
         validate: {
           validator: function (value) {

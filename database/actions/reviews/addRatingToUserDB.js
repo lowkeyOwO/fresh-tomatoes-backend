@@ -3,10 +3,12 @@ import userListModel from "../../models/userListModel.js";
 
 export default async function addRatingToUserDB(
   username,
+  title,
   review,
   rating,
   createdAt,
-  movieId
+  movieId,
+  movieName
 ) {
   try {
     // Adding to userList array
@@ -16,9 +18,11 @@ export default async function addRatingToUserDB(
         $push: {
           reviewed_movies: {
             movie_id: movieId,
+            title: title,
             review: review,
             rating: rating,
             created_at: createdAt,
+            movie_name: movieName
           },
         },
       },
@@ -31,6 +35,7 @@ export default async function addRatingToUserDB(
         $push: {
           review_list: {
             username: username,
+            title : title,
             review: review,
             created_at: createdAt,
             rating: rating,
@@ -39,7 +44,6 @@ export default async function addRatingToUserDB(
       },
       { returnOriginal: false }
     );
-    console.log("File 3:\t", userUpdate, "\n\n", movieUpdate);
     if ((userUpdate !== null) & (movieUpdate !== null)) {
       return { success: true };
     }

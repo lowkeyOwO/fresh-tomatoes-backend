@@ -12,7 +12,7 @@ export default async function removeRating(movie_id, session_id) {
     };
     const removeRatingData = await fetch(removeRatingURL, removeRatingOPT);
     const removeRatingStatus = await removeRatingData.json();
-    console.log(removeRatingStatus);
+    console.log("Rating remove status from TMDB:\t",removeRatingStatus);
     if (removeRatingStatus.success) {
       return { success: true };
     }

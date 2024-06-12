@@ -12,5 +12,6 @@ export default async function getList(account_id) {
   };
   const getListRes = await fetch(getListURL, getListOpt);
   const getListVal = await getListRes.json();
+  console.log("List values:\t",getListVal);
   return getListVal;
 }

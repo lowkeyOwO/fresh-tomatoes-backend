@@ -27,7 +27,6 @@ export default async function deleteRatingfromDB(username, movie_id) {
       },
       { returnOriginal: false }
     );
-    console.log(userDelete, movieDelete);
     if (userDelete !== null && movieDelete !== null) {
       return { success: true };
     }

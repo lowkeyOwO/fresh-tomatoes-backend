@@ -6,15 +6,17 @@ export default async function addReview(
   account_id,
   session_id,
   username,
+  title,
   review,
   rating,
   createdAt,
-  movieId
+  movieId,
+  movieName
 ) {
   try {
     // Adds rating to TMDB profile
     const addRatingStatus = await addRatingToTMDB(session_id, rating, movieId);
-    // Adds movie to WatchList
+    // // Adds movie to WatchList
     const addToListStatus = await addMovieToWatchedList(
       account_id,
       session_id,
@@ -23,16 +25,20 @@ export default async function addReview(
     // Adds to MongoDB array, both movieList and userList
     const addMovieToDBStatus = await addRatingToUserDB(
       username,
+      title,
       review,
       rating,
       createdAt,
-      movieId
+      movieId,
+      movieName
     );
-    if (
-      addRatingStatus.success === true &&
+    // console.log(addRatingStatus, addToListStatus, addMovieToDBStatus);
+    /*&&
       (addToListStatus.success === true ||
         (addToListStatus.success === false &&
-          addToListStatus.status_code === 8)) &&
+          addToListStatus.status_code === 8))*/
+    if (
+      addRatingStatus.success === true &&
       addMovieToDBStatus.success === true
     ) {
       return { success: true };

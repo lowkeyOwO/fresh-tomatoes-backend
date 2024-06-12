@@ -18,6 +18,5 @@ export default async function addRatingToTMDB(
   };
   const addRatingStatus = await fetch(addRatingURL, addRatingOpt);
   const addRatingData = await addRatingStatus.json()
-  console.log("File 1:\t", addRatingData);
   return addRatingData;
 }

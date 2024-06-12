@@ -8,6 +8,7 @@ export default async function addMovieToWatchedList(
 ) {
   const getListStatus = await getList(account_id);
   const getListId = await getListStatus.results[0].id;
+  console.log("List ID:\t",getListId, session_id, account_id)
   const addMovieToWatchedListURL = `https://api.themoviedb.org/3/list/${getListId}/add_item?session_id=${session_id}`;
   const addMovieToWatchedListOpt = {
     method: "POST",
@@ -24,6 +25,6 @@ export default async function addMovieToWatchedList(
     addMovieToWatchedListOpt
   );
   const addMovieData = await addMovieToWatchedListStatus.json();
-  console.log("File 2:\t", addMovieData);
+  console.log("Watched List Status:\t", addMovieData);
     return addMovieData;
 }

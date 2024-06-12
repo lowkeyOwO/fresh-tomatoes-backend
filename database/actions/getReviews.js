@@ -1,16 +1,19 @@
 import movieListModel from "../models/movieListModel.js";
+import getUserProfileDetails from "./getUserProfileDetails.js";
 
 export default async function getReviews(movieId) {
   try {
-    const movieReviews = await movieListModel.findOne({ movieId: movieId });
+    const movieReviews = await movieListModel.findOne({ movie_id: +movieId });
     if (movieReviews === null) {
       return {
-        "reviews" : []
-      }
+        reviews: [],
+      };
     } else {
+      const userDetails = await getUserProfileDetails(movieReviews);
       return {
-        "reviews" : movieReviews
-      }
+        userDetails,
+        reviews: movieReviews,
+      };
     }
   } catch (err) {
     console.error(err);

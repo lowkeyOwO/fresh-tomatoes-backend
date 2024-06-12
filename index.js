@@ -13,14 +13,14 @@ import post_login from "./api_routes/post_login.js";
 import post_profile from "./api_routes/post_profile.js";
 import addFavorites from "./api_routes/post_addFavorites.js";
 import post_add_review from "./api_routes/post_addReview.js";
-import delete_del_review from "./api_routes/delete_del_review.js";
-import patch_edit_review from "./api_routes/patch_edit_review.js";
 import followUser from "./database/actions/user/followUser.js";
 import unfollowUser from "./database/actions/user/unfollowUser.js";
 import getUserDetails from "./database/actions/user/getUserDetails.js";
 import editWatchList from "./generators/lists/editWatchList.js";
 import post_movie_details from "./api_routes/post_movie_details.js";
 import get_movie_review from "./api_routes/get_movie_review.js";
+import post_del_review from "./api_routes/post_del_review.js";
+import post_edit_review from "./api_routes/post_edit_review.js";
 
 // dotenv-config
 config();
@@ -38,7 +38,12 @@ const uri = `mongodb+srv://${process.env.MONGO_UNAME}:${process.env.MONGO_PW}@${
 
 //Home
 app.get("/", (req, res) => {
-  res.status(200).send("WELCOME TO FRESH TOMATOES BACKEND!").end();
+  res
+    .status(200)
+    .send(
+      "<div style='overflow: hidden;'><h1 style='text-align: center;'>YOU SHALL NOT PASS!</h1><h6 style='text-align: center;'>(super secret backend of fresh tomatoes)</h6><img src='https://i.giphy.com/GeimqsH0TLDt4tScGw.webp' style='height: 80vh; width:100vw;'/></div>"
+    )
+    .end();
 });
 
 // Login to TMDB and return session_token to user
@@ -54,10 +59,10 @@ app.post("/api/addFavorites", verifyToken, addFavorites);
 app.post("/api/addReview", verifyToken, post_add_review);
 
 // Edit the review of already posted movie
-app.patch("/api/editReview", verifyToken, patch_edit_review);
+app.post("/api/editReview", verifyToken, post_edit_review);
 
 // Delete Existing Review
-app.delete("/api/deleteReview", verifyToken, delete_del_review);
+app.post("/api/deleteReview", verifyToken, post_del_review);
 
 // Follow another User
 app.post("/api/followUser", verifyToken, followUser);
