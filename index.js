@@ -21,6 +21,8 @@ import post_movie_details from "./api_routes/post_movie_details.js";
 import get_movie_review from "./api_routes/get_movie_review.js";
 import post_del_review from "./api_routes/post_del_review.js";
 import post_edit_review from "./api_routes/post_edit_review.js";
+import get_person_details from "./api_routes/get_person_details.js";
+import post_search_data from "./api_routes/post_search_data.js";
 
 // dotenv-config
 config();
@@ -76,11 +78,17 @@ app.post("/api/addMovieToWatchlist", verifyToken, editWatchList);
 // Get user Profile details
 app.get("/api/findUser", verifyToken, getUserDetails);
 
-//get movie details from TMDB
+// get movie details from TMDB
 app.post("/api/getMovieDetails", verifyToken, post_movie_details);
 
-//get_movie_review from TMDB
+// get_movie_review from DB
 app.post("/api/getMovieReviews", verifyToken, get_movie_review);
+
+// get crew/cast member details from TMDB
+app.post("/api/getPersonDetails", verifyToken, get_person_details);
+
+// search for data
+app.post("/api/search", verifyToken, post_search_data);
 
 app.listen(PORT, () => {
   console.log(`Successfully listening on ${PORT}!`);
