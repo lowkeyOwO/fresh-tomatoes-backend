@@ -23,6 +23,7 @@ import post_del_review from "./api_routes/post_del_review.js";
 import post_edit_review from "./api_routes/post_edit_review.js";
 import get_person_details from "./api_routes/get_person_details.js";
 import post_search_data from "./api_routes/post_search_data.js";
+import get_homepage from "./api_routes/get_homepage.js";
 
 // dotenv-config
 config();
@@ -89,6 +90,9 @@ app.post("/api/getPersonDetails", verifyToken, get_person_details);
 
 // search for data
 app.post("/api/search", verifyToken, post_search_data);
+
+// Homepage Details
+app.post("/api/homepage",verifyToken, get_homepage);
 
 app.listen(PORT, () => {
   console.log(`Successfully listening on ${PORT}!`);
