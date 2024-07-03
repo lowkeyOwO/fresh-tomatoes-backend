@@ -34,6 +34,7 @@ const PORT = process.env.PORT || 4000;
 const app = express();
 app.use(express.json());
 
+// Setting up CORS
 const allowedOrigin = process.env.FRONTENDURL;
 
 const corsOptions = {
