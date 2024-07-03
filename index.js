@@ -38,7 +38,7 @@ app.use(express.json());
 const allowedOrigin = process.env.FRONTENDURL;
 
 const corsOptions = {
-  origin: allowedOrigin,
+  origin: "*",
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "HEAD", "OPTIONS"],
   allowedHeaders: [
     "Content-Type",
