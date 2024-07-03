@@ -38,7 +38,19 @@ app.use(express.json());
 const allowedOrigin = process.env.FRONTENDURL;
 
 const corsOptions = {
-  origin: allowedOrigin
+  origin: allowedOrigin,
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "HEAD", "OPTIONS"],
+  allowedHeaders: [
+    "Content-Type",
+    "Origin",
+    "X-Requested-With",
+    "Accept",
+    "x-client-key",
+    "x-client-token",
+    "x-client-secret",
+    "Authorization",
+  ],
+  credentials: true,
 };
 
 // Apply CORS middleware with options
@@ -102,7 +114,7 @@ app.post("/api/getPersonDetails", verifyToken, get_person_details);
 app.post("/api/search", verifyToken, post_search_data);
 
 // Homepage Details
-app.post("/api/homepage",verifyToken, get_homepage);
+app.post("/api/homepage", verifyToken, get_homepage);
 
 app.listen(PORT, () => {
   console.log(`Successfully listening on ${PORT}!`);
