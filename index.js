@@ -38,19 +38,12 @@ app.use(express.json());
 const allowedOrigin = process.env.FRONTENDURL;
 
 const corsOptions = {
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigin === origin) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
+  origin: allowedOrigin
 };
 
 // Apply CORS middleware with options
 app.use(cors(corsOptions));
 
-app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 
 // Creating mongoose-MongoDB client URI
